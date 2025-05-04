@@ -17,5 +17,9 @@ namespace ProceduralItemGenerator
 
         [Header("Rarity Modifier")]
         public Rarity rarityIncrease;
+
+        [Header("Rarity Filtering")]
+        public Rarity minimumRarity = Rarity.Common;
+
     }
 }
