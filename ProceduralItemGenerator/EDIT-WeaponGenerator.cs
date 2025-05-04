@@ -2,8 +2,8 @@ public WeaponAffixSet affixSet; // assign in Inspector
 
 private WeaponStats ApplyAffixes(WeaponStats stats)
 {
-    var prefix = affixSet.GetRandomAffix(AffixType.Prefix);
-    var suffix = affixSet.GetRandomAffix(AffixType.Suffix);
+    var prefix = affixSet.GetRandomAffix(AffixType.Prefix, stats.rarity);
+    var suffix = affixSet.GetRandomAffix(AffixType.Suffix, stats.rarity);
 
     if (prefix != null)
     {
@@ -25,6 +25,7 @@ private WeaponStats ApplyAffixes(WeaponStats stats)
 
     return stats;
 }
+
 
 protected override ItemStats GenerateStats()
 {
