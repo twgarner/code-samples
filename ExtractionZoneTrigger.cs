@@ -43,6 +43,12 @@ public class ExtractionZoneTrigger : MonoBehaviour
 
     void ExtractPlayer()
     {
+
+        // Award currency
+          if(ProgressionManager.Instance != null)
+    {
+        ProgressionManager.Instance.AddCurrency(100); // or scale based on loot
+    }
         // Optional: Play feedbacks
         MMGameEvent.Trigger("ExtractionComplete");
 
