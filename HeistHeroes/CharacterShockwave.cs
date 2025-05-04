@@ -45,6 +45,14 @@ public class CharacterShockwave : CharacterAbility
         MMFeedbacks?.PlayFeedbacks();
     }
 
+    public void MobileTrigger()
+    {
+        if (Time.time - _lastUsedTime >= CooldownDuration)
+        {
+            TriggerShockwave();
+        }
+    }
+
     // Optional: Visualize shockwave range
     private void OnDrawGizmosSelected()
     {
