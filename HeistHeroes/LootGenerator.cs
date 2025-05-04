@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class LootGenerator : MonoBehaviour
 {
     public List<LootItemData> lootPool;
-    public List<AffixData> prefixPool;
-    public List<AffixData> suffixPool;
+    public List<RolledAffix> prefixPool;
+    public List<RolledAffix> suffixPool;
 
     public LootItem GenerateLoot()
     {
@@ -17,7 +17,8 @@ public class LootGenerator : MonoBehaviour
         newItem.rarity = RollRarity();
         newItem.type = baseItem.type;
         newItem.affixes = new List<AffixData>();
-
+        
+        //After we get the affix and rarity, we want to call RollAffix. Then assign it to the list of affixes.
         if (newItem.rarity >= Rarity.Uncommon)
             newItem.affixes.Add(GetRandomAffix(prefixPool));
 
@@ -40,5 +41,30 @@ public class LootGenerator : MonoBehaviour
     AffixData GetRandomAffix(List<AffixData> pool)
     {
         return pool[Random.Range(0, pool.Count)];
+    }
+
+    RolledAffix RollAffix(AffixData affix, Rarity rarity)
+    {
+        float multiplier = GetRarityMultiplier(rarity);
+    
+        return new RolledAffix
+        {
+            label = affix.affixLabel,
+            statModified = affix.statModified,
+            type = affix.affixType,
+            value = Random.Range(affix.baseMinValue, affix.baseMaxValue) * multiplier
+        };
+    }
+    
+    float GetRarityMultiplier(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.Uncommon: return 1.0f;
+            case Rarity.Rare:     return 1.25f;
+            case Rarity.Epic:     return 1.5f;
+            case Rarity.Legendary:return 2.0f;
+            default:              return 1.0f;
+        }
     }
 }
