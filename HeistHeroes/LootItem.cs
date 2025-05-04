@@ -7,5 +7,5 @@ public class LootItem
     public Sprite icon;
     public Rarity rarity;
     public ItemType type;
-    public List<AffixData> affixes;
+    public List<RolledAffix> affixes;
 }
